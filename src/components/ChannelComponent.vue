@@ -3,7 +3,7 @@
   const pusher = new Pusher('0c9a84e4b8eec1fa3344', {
     cluster: 'ap2',
     encrypted: true,
-    authEndpoint: 'http://192.168.0.105:5000/pusher/auth',
+    authEndpoint: 'http://localhost:5000/pusher/auth',
     auth: {
       params: { icon: 'foo-bar' },
     }
