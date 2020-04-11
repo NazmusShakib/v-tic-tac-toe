@@ -9,42 +9,28 @@ export default new Vuex.Store({
       id: null,
       icon:'X'
     },
+    myself: {
+      id: null,
+      icon:null
+    },
   	history: [{
       squares: Array(9).fill(null),
       winner:null,
       nextPlayer: null
     }],
-    playerOne: {
-      id: null,
-      icon:'X'
-    },
-    playerTwo: {
-      id: null,
-      icon:'0'
-    },
   	stepNo:0,
     winner:null
   },
   getters:{
     getHistory: (state) => state.history,
-    getPlayerOne: (state) => state.playerOne,
-    getPlayerTwo: (state) => state.playerTwo,
     getCurrentPlayer: (state) => state.currentPlayer,
+    getMyself: (state) => state.myself,
     getStepNo: (state) => state.stepNo,
     getWinner: (state) => state.winner
   },
   mutations: {
-    changePlayer(state, player) {
-      if(player == 'X')
-        state.currentPlayer = state.playerOne
-      else
-        state.currentPlayer = state.playerTwo    
-    },
     togglePlayer(state){
-      state.currentPlayer = state.currentPlayer.icon == 'X' ? state.playerTwo : state.playerOne
-      // console.log('TogglePlayer 1:: ' + JSON.stringify(state.playerOne));
-      // console.log('TogglePlayer 2:: ' + JSON.stringify(state.playerTwo));
-      // console.log('CurrentPlayer :: ' + JSON.stringify(state.currentPlayer));
+      state.currentPlayer.icon = state.currentPlayer.icon == 'X' ? '0' : 'X'
     },
     reset(state){
       state.history = [
@@ -61,14 +47,11 @@ export default new Vuex.Store({
       state.history = payload
       state.stepNo = state.history.length-1
     },
-    setPlayerOne(state, playerInfo){
-      state.playerOne = playerInfo
-    },
-    setPlayerTwo(state, playerInfo){
-      state.playerTwo = playerInfo
-    },
     setCurrentPlayer(state, playerInfo){
       state.currentPlayer = playerInfo
+    },
+    setMyself(state, myInfo){
+      state.myself = myInfo
     },
     setWinner(state,winner){
       state.winner=winner;

@@ -29,10 +29,10 @@ import Square from '@/components/SquareComponent'
     },
     computed: {
       ...mapGetters([
-        'getCurrentPlayer', 'getPlayerOne', 'getPlayerTwo'
+        'getCurrentPlayer', 'getMyself'
       ]),
       playerName() {
-        return (!this.getPlayerOne.id) ? this.getPlayerTwo.icon : this.getPlayerOne.icon
+        return this.getMyself.icon
       }
     }
   }

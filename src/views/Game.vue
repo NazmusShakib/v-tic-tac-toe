@@ -11,11 +11,11 @@
     </div>
     <Board v-if="getReady"></Board>
     <div>
-      <ol>
+      <!-- <ol>
           <li v-for="n in getHistoryLen" :key="n">
-            <a href="#" @click.prevent="goToStep(n-1)">{{ n-1 == 0 ? 'Game Start':'Move #'+(n-1)}}</a>
+              Luck comes here.
           </li>
-      </ol>
+      </ol> -->
       <div v-if="getWinner">Winner is {{getWinner}} <button class='reset' @click.prevent="reset()"> reset</button></div>
       <div v-else-if="getHistoryLen == 10">Match Draw <button @click.prevent="reset()"> reset</button></div>
     </div>
@@ -40,7 +40,7 @@
     },
     methods:{
       ...mapMutations([
-        'changePlayer','reset','setStepNo','setWinner', 'addHistory', 'setCurrentPlayer', 'setPlayerOne', 'setPlayerTwo'
+        'changePlayer','reset','setStepNo','setWinner', 'addHistory', 'setCurrentPlayer', 'setMyself'
       ]),
       fetchPresence: function() {
         this.presenceid = this.getUniqueId()
@@ -57,11 +57,11 @@
         })
 
         channel.bind('pusher:subscription_succeeded', members => {
-          if (members.count === 1 && !this.getPlayerOne.id) {
-            this.setPlayerOne({ id: members.myID, icon:'X' })
+          if (members.count === 1 && !this.getMyself.id) {
+            this.setMyself({ id: members.myID, icon:'X' })
           } else if (members.count === 2) {
             this.getReady = true
-            this.setPlayerTwo({ id: members.myID, icon:'0' })
+            this.setMyself({ id: members.myID, icon:'0' })
           }
         })
 
@@ -77,18 +77,11 @@
           this.addHistory(history.concat([payload]) );
           this.setCurrentPlayer({
             'icon' : payload.nextPlayer,
-            'id' : null
+            'id' : channel.members.me.id
           })
-          console.log("OUT:: " + JSON.stringify(this.getCurrentPlayer));
-          console.log("Channel IN ID:: " + channel.members.me.id);
         })
       },
-      goToStep: function(idx){
-        let current = this.getHistory[idx];
-        this.setStepNo(idx);
-        this.setWinner(current.winner);
-        this.changePlayer(current.player);
-      },
+
       getUniqueId () {
         return 'id=' + Math.random().toString(36).substr(2, 8)
       },
@@ -108,7 +101,7 @@
     },
     computed: {
       ...mapGetters([
-        'getHistory','getWinner', 'getPlayerOne', 'getPlayerTwo', 'getStepNo'
+        'getHistory','getWinner', 'getStepNo', 'getMyself', 'getCurrentPlayer'
       ]),
       getHistoryLen(){
         return this.getHistory.length

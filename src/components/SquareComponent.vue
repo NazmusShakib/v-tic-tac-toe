@@ -35,11 +35,12 @@ export default {
 
     handleClick: function(idx) {
       let channel = Channel.subscribeToPusher()
-      console.log("Channel IN ID:: " + channel.members.me.id);
-      if(!this.getCurrentPlayer.id || this.getCurrentPlayer.id != channel.members.me.id) {
+      if(this.getCurrentPlayer.icon == this.getMyself.icon) {
 
         let history = this.getHistory.slice(0, this.getStepNo+1);
         let current = history[history.length - 1];
+        /* console.log('current:: ' + JSON.stringify(current));
+        console.log('getCurrentPlayer:: ' + JSON.stringify(this.getCurrentPlayer)); */
         let squares = current.squares.slice();
 
         if(current.winner || squares[idx]){
@@ -47,10 +48,12 @@ export default {
         }
         squares[idx] = this.getCurrentPlayer.icon;
         let winner = this.calculateWinner(squares);
+
+        this.togglePlayer();
         let payload = {
           'squares':squares,
           'winner': winner,
-          'nextPlayer': this.getCurrentPlayer.icon == 'X' ? this.getPlayerTwo.icon : this.getPlayerOne.icon
+          'nextPlayer': this.getCurrentPlayer.icon
         }
         channel.trigger('client-send', payload)
 
@@ -59,19 +62,16 @@ export default {
           'icon' : payload.nextPlayer,
           'id' : channel.members.me.id
         })
-
-        console.log("GetCurrentPlayer In:: " + JSON.stringify(this.getCurrentPlayer));
         
         if(winner){
           this.setWinner(winner);
         }
-        this.togglePlayer();
       }
     },
   },
   computed: {
     ...mapGetters([
-      'getHistory','getStepNo','getCurrentPlayer', 'getPlayerOne', 'getPlayerTwo'
+      'getHistory','getStepNo','getCurrentPlayer', 'getMyself'
     ]),
     getVal: function () {
       return this.getHistory[this.getStepNo]['squares'][this.idx];
