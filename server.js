@@ -1,12 +1,11 @@
-/*
- * Initialise Express
- */
 const express = require('express');
 const path = require('path');
-const app = express();
-const crypto = require('crypto')
 const bodyParser = require('body-parser');
+const crypto = require('crypto')
+require('dotenv').config();
 
+const app = express();
+const { PUSHER_APP_ID, PUSHER_KEY, PUSHER_SECRET, TIME } = process.env;
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 
@@ -33,11 +32,13 @@ app.use((req, res, next) => {
  */
 const Pusher = require('pusher');
 const pusher = new Pusher({
-  appId:'735665',
-  key:'0c9a84e4b8eec1fa3344',
-  secret:'501aa388d3a6851f4882',
-  cluster:'ap2'
+  appId: PUSHER_APP_ID,
+  key: PUSHER_KEY,
+  secret: PUSHER_SECRET,
+  cluster: 'ap2',
+  forceTLS: true
 });
+
 
 /*
  * Define post route for creating new reviews
@@ -51,7 +52,7 @@ app.get('/test', (req, res) => {
 });
 
 app.post('/review', (req, res) => {
-  pusher.trigger('reviews', 'review_added', req.body);
+  pusher.trigger('test-channel', 'test-event', req.body);
   res.status(200).send();
 });
 

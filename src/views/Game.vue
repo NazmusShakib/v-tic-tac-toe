@@ -82,22 +82,6 @@
           console.log("OUT:: " + JSON.stringify(this.getCurrentPlayer));
           console.log("Channel IN ID:: " + channel.members.me.id);
         })
-        
-        /* channel.bind('client-send', (data) => {
-          console.log("aaa:: " + data);
-          if (this.getPlayerData.two.userid === 1) {
-            this.getPlayerData.two = data.two
-          } else if (this.getPlayerData.one.userid === 2) {
-            this.getPlayerData.one = data.one
-          }
-          this.getHistory.squares = data.squares,
-          this.getHistory.winner = data.winner
-        }) */
-        /* let history = this.getHistory.slice(0, this.getStepNo+1);
-        channel.bind('client-send', (payload) => {
-          console.log("aaa:: " + payload);
-          this.addHistory( history.concat([payload]) );
-        }) */
       },
       goToStep: function(idx){
         let current = this.getHistory[idx];

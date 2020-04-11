@@ -54,35 +54,12 @@ export default {
         }
         channel.trigger('client-send', payload)
 
-
-        // Ajax call to send data to pusher
-        /* fetch('/review',{
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-type': 'application/json',
-          },  
-          body:JSON.stringify(payload)
-        }).then((data) => {
-          var channel = this.$pusher.subscribe('reviews');
-          channel.bind('review_added', (payload) => {
-            this.addHistory( history.concat([payload]) );
-          });
-        }).catch((err)=>   console.log(err)) */
-
-        /* channel.bind('client-send', (payload) => {
-          this.addHistory(history.concat([payload]));
-          this.setCurrentPlayer({
-            'icon' : payload.nextPlayer,
-            'id' : null
-          })
-          console.log('Out:: ' +JSON.stringify(this.getCurrentPlayer));
-        }) */
         this.addHistory( history.concat([payload]) );
         this.setCurrentPlayer({
-            'icon' : payload.nextPlayer,
-            'id' : channel.members.me.id
-          })
+          'icon' : payload.nextPlayer,
+          'id' : channel.members.me.id
+        })
+
         console.log("GetCurrentPlayer In:: " + JSON.stringify(this.getCurrentPlayer));
         
         if(winner){
