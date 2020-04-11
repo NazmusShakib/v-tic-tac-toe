@@ -1,7 +1,26 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-  </div>
+
+
+<table>
+  <tr>
+    <td></td>
+    <td class="vert"></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="hori"></td>
+    <td class="vert hori"></td>
+    <td class="hori"></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="vert"></td>
+    <td></td>
+  </tr>
+</table>
+</div>
 </template>
 
 <script>
@@ -35,3 +54,47 @@ const lines = [
 
 }
 </script>
+
+<style scoped>
+td {
+  width: 100px;
+  height: 100px;
+}
+table {
+  margin: 5px auto;
+}
+.vert {
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+.hori {
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+
+/* table {
+    margin: 5px auto;
+  }
+  td {
+    width: 100px;
+    height: 100px;
+  }
+  tr:nth-child(1) > td:nth-child(2), tr:nth-child(3) > td:nth-child(2) {
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+  }
+  tr:nth-child(2) > td:nth-child(2) {
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+  }
+  tr:nth-child(2) > td:nth-child(1), tr:nth-child(2) > td:nth-child(3)  {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+  } */
+
+
+
+</style>
