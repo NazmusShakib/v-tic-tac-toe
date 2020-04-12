@@ -36,7 +36,8 @@ export default new Vuex.Store({
       state.history = [
     		{
           squares: Array(9).fill(null),
-          winner:null
+          winner:null,
+          nextPlayer: null
         }
     	]
       state.stepNo=0

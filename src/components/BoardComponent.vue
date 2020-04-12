@@ -33,9 +33,6 @@ import Square from '@/components/SquareComponent'
         'getCurrentPlayer', 'getMyself'
       ]),
       playerName() {
-        // You go first. It's your turn.
-        // Opponent's turn
-        // It's your turn
         return this.getMyself.icon
       },
       turnMessage() {

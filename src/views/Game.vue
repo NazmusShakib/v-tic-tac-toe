@@ -103,8 +103,8 @@
       },
 
       restartPlay() {
-        this.channel.bind('client-send', () => {
-          console.log('12aaa3');
+        this.channel.trigger('client-reset', 'reset-triggered')
+        this.channel.bind('client-reset', () => {
           this.reset();
         })
         this.reset();
