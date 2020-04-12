@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     currentPlayer: {
       id: null,
-      icon:'X'
+      icon:'X',
     },
     myself: {
       id: null,

@@ -3,7 +3,7 @@
     <div v-if="!getReady">
       <div class="inner">
         <h1>Welcome to Tic-Tac-Toe Game!</h1>
-        <p>Invite a second player by sending them this link {{url}}.</p>
+        <p>Invite a second player by sending this link: <span class="invitation-link">{{url}}</span></p>
       </div>
     </div>
     <div v-else>
@@ -16,8 +16,12 @@
               Luck comes here.
           </li>
       </ol> -->
-      <div v-if="getWinner">Winner is {{getWinner}} <button class='reset' @click.prevent="reset()"> reset</button></div>
-      <div v-else-if="getHistoryLen == 10">Match Draw <button @click.prevent="reset()"> reset</button></div>
+      <div v-if="getWinner">
+        Winner is {{getWinner}} <button class='reset' @click.prevent="reset()"> reset</button>
+      </div>
+      <div v-else-if="getHistoryLen == 10">
+        Match Draw <button @click.prevent="reset()"> reset</button>
+      </div>
     </div>
   </div>
 </template>
@@ -110,11 +114,16 @@
   }
 </script>
 <style scoped>
-.game{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+
+.invitation-link{
+  color: green;
+  font-size: 20px;
 }
+
+.invitation-link:hover{
+  cursor: pointer;
+}
+
 button.reset{
   color: #fff;
   background-color: #337ab7;

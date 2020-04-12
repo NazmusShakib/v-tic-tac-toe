@@ -39,8 +39,6 @@ export default {
 
         let history = this.getHistory.slice(0, this.getStepNo+1);
         let current = history[history.length - 1];
-        /* console.log('current:: ' + JSON.stringify(current));
-        console.log('getCurrentPlayer:: ' + JSON.stringify(this.getCurrentPlayer)); */
         let squares = current.squares.slice();
 
         if(current.winner || squares[idx]){
@@ -90,11 +88,11 @@ export default {
     font-size: 24px;
     font-weight: bold;
     line-height: 38px;
-    height: 38px;
+    height: 50px;
     margin-right: -1px;
     margin-top: -1px;
     padding: 0;
     text-align: center;
-    width: 38px;
+    width: 50px;
   }
 </style>
