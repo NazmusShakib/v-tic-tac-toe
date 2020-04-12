@@ -40,7 +40,7 @@ export default new Vuex.Store({
         }
     	]
       state.stepNo=0
-      state.currentPlayer = state.winner ? state.winner : state.currentPlayer
+      state.currentPlayer.icon = state.winner ? state.winner : state.currentPlayer.icon
       state.winner=null
     },
     addHistory(state, payload){

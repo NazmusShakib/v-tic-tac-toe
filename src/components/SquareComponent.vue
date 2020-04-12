@@ -63,6 +63,7 @@ export default {
         
         if(winner){
           this.setWinner(winner);
+          channel.trigger('client-winner', winner)
         }
       }
     },

@@ -7,20 +7,15 @@
       </div>
     </div>
     <div v-else>
-      
+      <Board></Board>
     </div>
-    <Board v-if="getReady"></Board>
+    
     <div>
-      <!-- <ol>
-          <li v-for="n in getHistoryLen" :key="n">
-              Luck comes here.
-          </li>
-      </ol> -->
       <div v-if="getWinner">
-        Winner is {{getWinner}} <button class='reset' @click.prevent="reset()"> reset</button>
+        Winner is {{getWinner}} <button class='reset' @click.prevent="restartPlay()"> reset</button>
       </div>
       <div v-else-if="getHistoryLen == 10">
-        Match Draw <button @click.prevent="reset()"> reset</button>
+        Match Draw <button @click.prevent="restartPlay()"> reset</button>
       </div>
     </div>
   </div>
@@ -37,9 +32,11 @@
       presenceid: null,
       players: 1,
       getReady: false,
-      url: null
+      url: null,
+      channel: null
     }),
     created () {
+      this.channel = Channel.subscribeToPusher()
       this.fetchPresence()
     },
     methods:{
@@ -53,14 +50,14 @@
           window.location.href = window.location.href + separator + this.presenceid
         }
         this.url = window.location.href
-        let channel = Channel.subscribeToPusher()
+        // let channel = Channel.subscribeToPusher()
         
-        channel.bind('pusher:member_added', members => {
+        this.channel.bind('pusher:member_added', members => {
           this.players += 1
           this.getReady = true
         })
 
-        channel.bind('pusher:subscription_succeeded', members => {
+        this.channel.bind('pusher:subscription_succeeded', members => {
           if (members.count === 1 && !this.getMyself.id) {
             this.setMyself({ id: members.myID, icon:'X' })
           } else if (members.count === 2) {
@@ -69,7 +66,7 @@
           }
         })
 
-        channel.bind('pusher:member_removed', member => {
+        this.channel.bind('pusher:member_removed', member => {
           this.players -= 1
           if (member.count === 1) {
             this.getReady = false
@@ -77,13 +74,18 @@
         })
 
         let history = this.getHistory.slice(0, this.getStepNo+1);
-        channel.bind('client-send', (payload) => {
+        this.channel.bind('client-send', (payload) => {
           this.addHistory(history.concat([payload]) );
           this.setCurrentPlayer({
             'icon' : payload.nextPlayer,
-            'id' : channel.members.me.id
+            'id' : this.channel.members.me.id
           })
         })
+
+        this.channel.bind('client-winner', (winner) => {
+          this.setWinner(winner);
+        })
+        
       },
 
       getUniqueId () {
@@ -99,6 +101,14 @@
         let id = getQueryString('id')
         return id
       },
+
+      restartPlay() {
+        this.channel.bind('client-send', () => {
+          console.log('12aaa3');
+          this.reset();
+        })
+        this.reset();
+      }
     },
     components:{
       'Board':Board
