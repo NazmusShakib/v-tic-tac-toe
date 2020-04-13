@@ -7,12 +7,14 @@
       </div>
     </div>
     <div v-else>
+      {{ getScore }}
+      <br/>
       <Board></Board>
     </div>
     
     <div>
       <div v-if="getWinner">
-        Winner is {{getWinner}} <button class='reset' @click.prevent="restartPlay()"> reset</button>
+        Winner is {{ getWinner }} <button class='reset' @click.prevent="restartPlay()"> reset</button>
       </div>
       <div v-else-if="getSquaresLength == 9">
         Match Draw <button @click.prevent="restartPlay()"> reset</button>
@@ -41,7 +43,7 @@
     },
     methods:{
       ...mapMutations([
-        'changePlayer','reset','setWinner', 'addHistory', 'setCurrentPlayer', 'setMyself'
+        'changePlayer','reset', 'addHistory', 'setCurrentPlayer', 'setMyself', 'setScore'
       ]),
       fetchPresence: function() {
         this.presenceid = this.getUniqueId()
@@ -62,7 +64,7 @@
             this.setMyself({ id: members.myID, icon:'X' })
           } else if (members.count === 2) {
             this.getReady = true
-            this.setMyself({ id: members.myID, icon:'0' })
+            this.setMyself({ id: members.myID, icon:'O' })
           }
         })
 
@@ -81,7 +83,7 @@
             'id' : this.channel.members.me.id
           })
           if(payload.winner) {
-            this.setWinner(payload.winner);
+            this.setScore(payload.winner);
           }
         })
 
@@ -115,7 +117,7 @@
     },
     computed: {
       ...mapGetters([
-        'getHistory','getWinner', 'getMyself', 'getCurrentPlayer'
+        'getHistory', 'getMyself', 'getCurrentPlayer', 'getScore'
       ]),
       getSquaresLength() {
         let length = 0
@@ -123,7 +125,13 @@
         squares.forEach((square, index) => {
           square ? length++ : null
         });
+        if(length == 9 && !this.getHistory.winner)
+          this.setScore('Draw');
+
         return length;
+      },
+      getWinner() {
+        return this.getHistory.winner;
       }
     }
   }
