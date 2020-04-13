@@ -16,7 +16,7 @@ export default {
   ],
   methods:{
     ...mapMutations([
-      'addHistory','setWinner','togglePlayer', 'setCurrentPlayer'
+      'addHistory', 'togglePlayer', 'setCurrentPlayer', 'setScore'
     ]),
     calculateWinner: function(squares) {
       const lines = [
@@ -39,7 +39,7 @@ export default {
         let history = this.getHistory;
         let squares = history.squares.slice();
 
-        if(history.winner || squares[idx]){
+        if(history.winner || squares[idx]) {
           return ;
         }
         squares[idx] = this.getCurrentPlayer.icon;
@@ -59,16 +59,15 @@ export default {
           'id' : channel.members.me.id
         })
         
-        if(winner){
-          this.setWinner(winner);
-          // channel.trigger('client-winner', winner)
+        if(winner) {
+          this.setScore(winner);
         }
       }
     },
   },
   computed: {
     ...mapGetters([
-      'getHistory','getStepNo','getCurrentPlayer', 'getMyself'
+      'getHistory', 'getCurrentPlayer', 'getMyself', 'getScore'
     ]),
     getVal: function () {
       return this.getHistory['squares'][this.idx];

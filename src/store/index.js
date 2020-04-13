@@ -7,8 +7,7 @@ export default new Vuex.Store({
   state: {
     currentPlayer: {
       id: null,
-      icon:'X',
-      stepCounter:0,
+      icon:'X'
     },
     myself: {
       id: null,
@@ -19,39 +18,38 @@ export default new Vuex.Store({
       winner:null,
       nextPlayer: null
     },
-    winner:null
+    score: Array()
   },
   getters:{
     getHistory: (state) => state.history,
     getCurrentPlayer: (state) => state.currentPlayer,
     getMyself: (state) => state.myself,
-    getWinner: (state) => state.winner
+    getScore: (state) => state.score
   },
   mutations: {
-    togglePlayer(state){
-      state.currentPlayer.icon = state.currentPlayer.icon == 'X' ? '0' : 'X'
+    togglePlayer(state) {
+      state.currentPlayer.icon = state.currentPlayer.icon == 'X' ? 'O' : 'X'
     },
-    reset(state){
+    reset(state) {
       state.history =
     		{
           squares: Array(9).fill(null),
-          winner:null,
+          winner: null,
           nextPlayer: null
         }
-      state.currentPlayer.icon = state.winner ? state.winner : state.currentPlayer.icon
-      state.winner=null
+      state.currentPlayer.icon = state.history.winner ? state.hostory.winner : state.currentPlayer.icon
     },
-    addHistory(state, payload){
+    addHistory(state, payload) {
       state.history = payload
     },
-    setCurrentPlayer(state, playerInfo){
+    setCurrentPlayer(state, playerInfo) {
       state.currentPlayer = playerInfo
     },
-    setMyself(state, myInfo){
+    setMyself(state, myInfo) {
       state.myself = myInfo
     },
-    setWinner(state,winner){
-      state.winner=winner;
+    setScore(state, score) {
+      state.score = state.score.concat(score);
     },
   },
   actions: {
