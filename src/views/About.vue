@@ -36,7 +36,7 @@ const lines = [
       ];
       var aa = Array(9).fill(null);
 
-      console.log(aa);
+      console.log(aa.length);
 
       /* var channel = this.$pusher.subscribe('reviews');
       channel.bind('review_added', (log) => {

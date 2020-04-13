@@ -14,7 +14,7 @@
       <div v-if="getWinner">
         Winner is {{getWinner}} <button class='reset' @click.prevent="restartPlay()"> reset</button>
       </div>
-      <div v-else-if="getHistoryLen == 10">
+      <div v-else-if="getSquaresLength == 9">
         Match Draw <button @click.prevent="restartPlay()"> reset</button>
       </div>
     </div>
@@ -85,10 +85,6 @@
           }
         })
 
-        /* this.channel.bind('client-winner', (winner) => {
-          this.setWinner(winner);
-        }) */
-
         this.channel.bind('client-reset', () => {
           this.reset();
         })
@@ -121,8 +117,13 @@
       ...mapGetters([
         'getHistory','getWinner', 'getMyself', 'getCurrentPlayer'
       ]),
-      getHistoryLen(){
-        return this.getHistory.length
+      getSquaresLength() {
+        let length = 0
+        let squares = this.getHistory.squares.slice();
+        squares.forEach((square, index) => {
+          square ? length++ : null
+        });
+        return length;
       }
     }
   }

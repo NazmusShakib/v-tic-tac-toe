@@ -8,6 +8,7 @@ export default new Vuex.Store({
     currentPlayer: {
       id: null,
       icon:'X',
+      stepCounter:0,
     },
     myself: {
       id: null,
