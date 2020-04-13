@@ -14,7 +14,7 @@
       <div v-if="getWinner">
         Winner is {{getWinner}} <button class='reset' @click.prevent="restartPlay()"> reset</button>
       </div>
-      <div v-else-if="getHistoryLen == 10">
+      <div v-else-if="getSquaresLength == 9">
         Match Draw <button @click.prevent="restartPlay()"> reset</button>
       </div>
     </div>
@@ -41,7 +41,7 @@
     },
     methods:{
       ...mapMutations([
-        'changePlayer','reset','setStepNo','setWinner', 'addHistory', 'setCurrentPlayer', 'setMyself'
+        'changePlayer','reset','setWinner', 'addHistory', 'setCurrentPlayer', 'setMyself'
       ]),
       fetchPresence: function() {
         this.presenceid = this.getUniqueId()
@@ -73,17 +73,20 @@
           }
         })
 
-        let history = this.getHistory.slice(0, this.getStepNo+1);
+        let history = this.getHistory;
         this.channel.bind('client-send', (payload) => {
-          this.addHistory(history.concat([payload]) );
+          this.addHistory(payload);
           this.setCurrentPlayer({
             'icon' : payload.nextPlayer,
             'id' : this.channel.members.me.id
           })
+          if(payload.winner) {
+            this.setWinner(payload.winner);
+          }
         })
 
-        this.channel.bind('client-winner', (winner) => {
-          this.setWinner(winner);
+        this.channel.bind('client-reset', () => {
+          this.reset();
         })
         
       },
@@ -104,9 +107,6 @@
 
       restartPlay() {
         this.channel.trigger('client-reset', 'reset-triggered')
-        this.channel.bind('client-reset', () => {
-          this.reset();
-        })
         this.reset();
       }
     },
@@ -115,10 +115,15 @@
     },
     computed: {
       ...mapGetters([
-        'getHistory','getWinner', 'getStepNo', 'getMyself', 'getCurrentPlayer'
+        'getHistory','getWinner', 'getMyself', 'getCurrentPlayer'
       ]),
-      getHistoryLen(){
-        return this.getHistory.length
+      getSquaresLength() {
+        let length = 0
+        let squares = this.getHistory.squares.slice();
+        squares.forEach((square, index) => {
+          square ? length++ : null
+        });
+        return length;
       }
     }
   }
