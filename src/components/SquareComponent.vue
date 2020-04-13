@@ -34,14 +34,12 @@ export default {
     },
 
     handleClick: function(idx) {
-      let channel = Channel.subscribeToPusher()
       if(this.getCurrentPlayer.icon == this.getMyself.icon) {
+        let channel = Channel.subscribeToPusher()
+        let history = this.getHistory;
+        let squares = history.squares.slice();
 
-        let history = this.getHistory.slice(0, this.getStepNo+1);
-        let current = history[history.length - 1];
-        let squares = current.squares.slice();
-
-        if(current.winner || squares[idx]){
+        if(history.winner || squares[idx]){
           return ;
         }
         squares[idx] = this.getCurrentPlayer.icon;
@@ -55,7 +53,7 @@ export default {
         }
         channel.trigger('client-send', payload)
 
-        this.addHistory( history.concat([payload]) );
+        this.addHistory(payload);
         this.setCurrentPlayer({
           'icon' : payload.nextPlayer,
           'id' : channel.members.me.id
@@ -63,7 +61,7 @@ export default {
         
         if(winner){
           this.setWinner(winner);
-          channel.trigger('client-winner', winner)
+          // channel.trigger('client-winner', winner)
         }
       }
     },
@@ -73,11 +71,8 @@ export default {
       'getHistory','getStepNo','getCurrentPlayer', 'getMyself'
     ]),
     getVal: function () {
-      return this.getHistory[this.getStepNo]['squares'][this.idx];
+      return this.getHistory['squares'][this.idx];
     },
-    getCurrent: function() {
-      return this.getHistory[this.getStepNo]
-    }
   }
 }
 </script>
