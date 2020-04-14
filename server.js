@@ -48,7 +48,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/test', (req, res) => {
-    res.json({"message": "Welcome to EasyNotes application. Take notes quickly. Organize and keep track of all your notes."});
+    res.json({"message": "Welcome to tic-tac-toe application."});
 });
 
 app.post('/review', (req, res) => {
