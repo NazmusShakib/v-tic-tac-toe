@@ -23,6 +23,8 @@ app.use((req, res, next) => {
   // Set to true if you need the website to include cookies in the requests sent
   // to the API (e.g. in case you use sessions)
   res.setHeader('Access-Control-Allow-Credentials', true)
+  // A cookie associated with a cross-site resource
+  res.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
   // Pass to next layer of middleware
   next()
 })

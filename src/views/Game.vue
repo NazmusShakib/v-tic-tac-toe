@@ -1,22 +1,12 @@
 <template>
-  <div class="game">
+  <div class="container">
+    <h3>Welcome to Tic-Tac-Toe Game!</h3>
     <div v-if="!getReady">
-      <div class="inner">
-        <h1>Welcome to Tic-Tac-Toe Game!</h1>
         <p>Invite a second player by sending this link: <br/><span class="invitation-link">{{url}}</span></p>
-      </div>
-    </div>
-    <div v-else>
-      <Board></Board>
     </div>
 
-    <div>
-      <div v-if="getWinner">
-        Winner is {{ getWinner }} <button class='reset' @click.prevent="restartPlay()"> reset</button>
-      </div>
-      <div v-else-if="getSquaresLength == 9">
-        Match Draw <button @click.prevent="restartPlay()"> reset</button>
-      </div>
+    <div v-else>
+      <Board></Board>
     </div>
   </div>
 </template>
@@ -41,7 +31,7 @@
     },
     methods:{
       ...mapMutations([
-        'changePlayer','reset', 'addHistory', 'setCurrentPlayer', 'setMyself', 'setScore'
+        'changePlayer', 'addHistory', 'setCurrentPlayer', 'setMyself', 'setScore', 'reset'
       ]),
       fetchPresence: function() {
         this.presenceid = this.getUniqueId()
@@ -104,11 +94,6 @@
         let id = getQueryString('id')
         return id
       },
-
-      restartPlay() {
-        this.channel.trigger('client-reset', 'reset-triggered')
-        this.reset();
-      }
     },
     components:{
       'Board':Board
@@ -117,20 +102,6 @@
       ...mapGetters([
         'getHistory', 'getMyself', 'getCurrentPlayer'
       ]),
-      getSquaresLength() {
-        let length = 0
-        let squares = this.getHistory.squares.slice();
-        squares.forEach((square, index) => {
-          square ? length++ : null
-        });
-        if(length == 9 && !this.getHistory.winner)
-          this.setScore('Draw');
-
-        return length;
-      },
-      getWinner() {
-        return this.getHistory.winner;
-      }
     }
   }
 </script>
@@ -145,28 +116,4 @@
   cursor: pointer;
 }
 
-button.reset{
-  color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
-  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.42857143;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -ms-touch-action: manipulation;
-  touch-action: manipulation;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background-image: none;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
 </style>

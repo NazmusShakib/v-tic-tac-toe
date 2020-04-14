@@ -6,12 +6,12 @@ Vue.use(VueRouter)
 
   const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
     component: Home
   },
   {
-    path: '/game',
+    path: '/',
     name: 'Game',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
