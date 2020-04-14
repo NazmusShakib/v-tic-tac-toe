@@ -1,10 +1,12 @@
 <template>
   <div>
     <div> <h3> Hi, Mr. <b>{{ playerName }}</b></h3> </div>
-    <div style="margin-bottom: 5px;"> {{ turnMessage }} </div>
-
-    <div v-for="i in 3" :key="i" class="board">
-      <Square v-for="j in 3" :key="j" :idx="getSquareIndex(i,j)"></Square>
+    
+    <div class="wrapper wrapper--rounded">
+      <h4 style="color: red;"> {{ turnMessage }} </h4>
+      <div v-for="i in 3" :key="i" class="board">
+        <Square v-for="j in 3" :key="j" :idx="getSquareIndex(i,j)"></Square>
+      </div>
     </div>
   </div>
 </template>
@@ -56,7 +58,31 @@ import Square from '@/components/SquareComponent'
     width: 50px;
     margin: 5px;
     text-align: center;
-    line-height: 75px;
-    font-size: 30px;
+  }
+  .wrapper {
+    box-sizing: border-box;
+    margin: 1rem auto 2rem;
+    padding: 1rem;
+    width: 80%;
+    max-width: 16rem;
+    background: linear-gradient(#222, #222), 
+                linear-gradient(to right, red, purple);
+    border: 5px solid transparent;
+    background-repeat: no-repeat;
+    background-origin: padding-box, border-box;
+  }
+  .wrapper--rounded {
+    border-radius: 1rem;
+    border-width: 10px;
+    position: relative;
+  }
+  .wrapper--rounded::before {
+    position: absolute;
+    top: -5px;
+    bottom: -5px;
+    left: -5px;
+    right: -5px;
+    border: 6px solid #222;
+    border-radius: .8rem;
   }
 </style>

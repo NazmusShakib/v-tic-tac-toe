@@ -77,15 +77,18 @@ export default {
 </script>
 <style scoped>
   .square{
-    background: #fff;
-    border: 1px solid #999;
+    border: 3px solid;
+    background-color: #222;
+    border-image-source: linear-gradient(45deg, rgb(0,143,104), rgb(250,224,66));
+    border-image-slice: 1;
     float: left;
-    font-size: 24px;
+    font-size: 40px;
     font-weight: bold;
-    line-height: 38px;
     height: 50px;
-    margin-right: -1px;
-    margin-top: -1px;
+    line-height: 38px;
+    color: white;
+    /* margin-right: -1px;
+    margin-top: -1px; */
     padding: 0;
     text-align: center;
     width: 50px;

@@ -3,7 +3,7 @@
     <div v-if="!getReady">
       <div class="inner">
         <h1>Welcome to Tic-Tac-Toe Game!</h1>
-        <p>Invite a second player by sending this link: <span class="invitation-link">{{url}}</span></p>
+        <p>Invite a second player by sending this link: <br/><span class="invitation-link">{{url}}</span></p>
       </div>
     </div>
     <div v-else>

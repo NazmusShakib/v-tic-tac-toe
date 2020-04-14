@@ -2,6 +2,17 @@
   <div class="about">
     <h1>This is an about page</h1>
 
+  <div class="d-flex justify-content-center flex-wrap bg-secondary mb-3">
+    <div class="p-2 bg-info">Flex item 1</div>
+    <div class="p-2 bg-warning">Flex item 2</div>
+    <div class="p-2 bg-primary">Flex item 3</div>
+  </div>
+
+<div class="d-flex flex-column flex-lg-row align-items-md-center">
+  <div>Flex item 1</div>
+  <div>Flex item 2</div>
+  <div>Flex item 3</div>
+</div>
 
 <table>
   <tr>
