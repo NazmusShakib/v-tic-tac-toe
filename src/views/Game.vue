@@ -7,11 +7,9 @@
       </div>
     </div>
     <div v-else>
-      {{ getScore }}
-      <br/>
       <Board></Board>
     </div>
-    
+
     <div>
       <div v-if="getWinner">
         Winner is {{ getWinner }} <button class='reset' @click.prevent="restartPlay()"> reset</button>
@@ -117,7 +115,7 @@
     },
     computed: {
       ...mapGetters([
-        'getHistory', 'getMyself', 'getCurrentPlayer', 'getScore'
+        'getHistory', 'getMyself', 'getCurrentPlayer'
       ]),
       getSquaresLength() {
         let length = 0
