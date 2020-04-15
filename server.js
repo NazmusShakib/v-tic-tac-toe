@@ -5,7 +5,7 @@ const crypto = require('crypto')
 require('dotenv').config();
 
 const app = express();
-const { PUSHER_APP_ID, PUSHER_KEY, PUSHER_SECRET, TIME } = process.env;
+const { PUSHER_APP_ID, PUSHER_APP_KEY, PUSHER_APP_SECRET, PUSHER_APP_CLUSTER } = process.env;
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 
@@ -35,9 +35,9 @@ app.use((req, res, next) => {
 const Pusher = require('pusher');
 const pusher = new Pusher({
   appId: PUSHER_APP_ID,
-  key: PUSHER_KEY,
-  secret: PUSHER_SECRET,
-  cluster: 'ap2',
+  key: PUSHER_APP_KEY,
+  secret: PUSHER_APP_SECRET,
+  cluster: PUSHER_APP_CLUSTER,
   forceTLS: true
 });
 

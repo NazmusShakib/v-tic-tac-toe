@@ -27,9 +27,9 @@
         <div class="wrapper">
           <h6>SCORE</h6>  
           <div class="d-flex flex-row bg-secondary">
-            <div class="p-2 bg-info flex-fill">X: {{ calculateScore[0] }}</div>
+            <div class="p-2 bg-warning flex-fill">X: {{ calculateScore[0] }}</div>
+            <div class="p-2 bg-info flex-fill">Draw: {{ calculateScore[2] }}</div>
             <div class="p-2 bg-warning flex-fill">O: {{ calculateScore[1] }} </div>
-            <div class="p-2 bg-primary flex-fill">Draw: {{ calculateScore[2] }}</div>
           </div>
         </div>
 
