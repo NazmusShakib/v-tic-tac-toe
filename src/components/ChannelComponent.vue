@@ -1,9 +1,9 @@
 <script>
   import Pusher from 'pusher-js'
-  const pusher = new Pusher('0c9a84e4b8eec1fa3344', {
-    cluster: 'ap2',
+  const pusher = new Pusher(process.env.VUE_APP_PUSHER_APP_KEY, {
+    cluster: process.env.VUE_APP_PUSHER_APP_CLUSTER,
     encrypted: true,
-    authEndpoint: 'http://127.0.0.1:5000/pusher/auth',
+    authEndpoint: process.env.VUE_APP_API_ENDPOINT + '/pusher/auth',
     auth: {
       params: { icon: 'foo-bar' },
     }

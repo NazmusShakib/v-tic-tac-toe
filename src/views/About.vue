@@ -10,12 +10,8 @@ export default {
   
   mounted() {
 
-    const lines = [
-        [0, 1, 2],[3, 4, 5],[6, 7, 8],
-        [0, 3, 6],[1, 4, 7],[2, 5, 8],
-        [0, 4, 8],[2, 4, 6],
-      ];
-      var aa = Array(9).fill(null);
+      console.log(process.env.VUE_APP_PUSHER_APP_KEY);
+      console.log(process.env.VUE_APP_PUSHER_APP_CLUSTER);
   }
 }
 </script>

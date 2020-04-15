@@ -1,5 +1,6 @@
+'use strict'
 module.exports = {
     devServer: {
-        proxy: 'http://127.0.0.1:5000',
+        proxy: process.env.VUE_APP_API_ENDPOINT,
     }
 }
