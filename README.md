@@ -20,7 +20,7 @@ Install all the dependencies
 
     npm install
 
-> Head over to Pusher and [register for a free account](https://dashboard.pusher.com/accounts/sign_up), if you don’t already have one. Then create an app on [the dashboard](https://dashboard.pusher.com/), and copy out the app credentials (PUSHER_APP_ID, PUSHER_APP_KEY, PUSHER_APP_SECRET and PUSHER_APP_CLUSTER). It is super straight-forward.
+> Head over to Pusher and [register for a free account](https://dashboard.pusher.com/accounts/sign_up), if you don’t already have one. Then create an app on [the dashboard](https://dashboard.pusher.com/) next, check the `Enable client events` from `App settings` tab. After that grab the credentials from `App keys` tab (app_id, key, secret and cluster). It is super straight-forward.
 
 Copy the env.example file and make the required configuration changes in the .env file according to your app.
 

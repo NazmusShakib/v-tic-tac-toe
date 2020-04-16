@@ -65,7 +65,7 @@ app.post('/pusher/auth', (req, res) => {
     user_id: crypto.randomBytes(16).toString('hex'),
     icon: req.body.icon
   }
-  console.log(req.body);
+  // console.log(req.body);
   let auth = pusher.authenticate(socketId, channel, presenceData)
   res.send(auth)
 })
