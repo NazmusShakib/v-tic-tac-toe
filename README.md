@@ -42,6 +42,9 @@ You can now access the server at http://127.0.0.1:8080
 **Make sure you set the correct pusher app information before running**
 
     npm run serve
+    
+**v-tic-tac-toe live demo**
+    [https://v-tic-tac-toe.herokuapp.com](https://v-tic-tac-toe.herokuapp.com/)
 
 ## Screenshot
 ![welcome-page](public/static/welcome-page-3.png)
