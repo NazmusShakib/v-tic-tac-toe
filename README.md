@@ -3,7 +3,7 @@ A simple tic-tac-toe multiplayer game built in Vue.js, Pusher and Node.js.
 ##
 
 ## Requirements
-* [npm](https://www.npmjs.com/) node package manager
+* [npm](https://www.npmjs.com/) node package manager (npm:8.19.4, node:v16.20.2)
 * Make sure port 8080 and 5000 are available in your machine
 
 ## Installation
